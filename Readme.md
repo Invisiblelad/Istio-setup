@@ -55,8 +55,7 @@ This setup helps to observe how traffic is shifted between two versions using Is
 
 ```sh
 helm install mongo mongo
-helm install dogbreed dogbreedv1
-helm install dogbreed dogbreedv2
+helm install dogbreed dogbreed
 ```
 
 ## Istio Configuration Files
