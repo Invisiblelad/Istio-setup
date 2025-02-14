@@ -1,0 +1,25 @@
+## This will route the traffic based on weightage
+
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: dogbreed-virtualservice
+  namespace: sample
+spec:
+  hosts:
+  - "dogbreed.example.com"  # Should match the Gateway
+  gateways:
+  - dogbreed-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: dogbreed-service.sample.svc.cluster.local
+        subset: v1
+      weight: 50
+    - destination:
+        host: dogbreed-service.sample.svc.cluster.local
+        subset: v2
+      weight: 50

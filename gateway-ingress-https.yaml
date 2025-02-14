@@ -1,0 +1,28 @@
+## This will add the ingress to the service
+
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: dogbreed-gateway
+  namespace: sample
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - dogbreed.example.com
+    tls:
+      httpsRedirect: true 
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: dogbreed-tls  ## this should be created in  istio-system namespace because istio will take from there only
+    hosts:
+    - dogbreed.example.com
